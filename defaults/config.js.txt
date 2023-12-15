@@ -1,0 +1,14 @@
+// @ts-check
+
+require('dotenv/config');
+const { config } = require('@potoland/core');
+
+module.exports = config.{{typo}}({
+	locations: {
+		base: {{baseR}},
+		output: {{outputR}},
+		commands: {{commandsR}},
+	},
+	intents: ['Guilds'],
+	debug: {{debugR}},
+});
