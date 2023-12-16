@@ -15,7 +15,7 @@ module.exports = (cli) => {
             /**@type {Record<string, object>} */
             const json = require(join(process.cwd(), str))
 
-            let typeResult = "export interface __GeneratedLangType{"
+            let typeResult = "export interface __LangType{"
 
             for (const [key, value] of Object.entries(json)) {
                 for (const [k, v] of Object.entries(recursive(key, value))) {
