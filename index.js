@@ -20,14 +20,3 @@ require('./commands/init')(cli)
 //     })
 
 cli.parse(process.argv);
-
-
-
-
-
-
-
-
-
-
-
