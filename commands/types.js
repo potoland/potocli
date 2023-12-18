@@ -21,7 +21,7 @@ module.exports = (cli) => {
                 for (const [k, v] of Object.entries(recursive(key, value))) {
                     /**@type {string[]} */
                     const keys = [];
-                    for (const [, vv] of getVariables(v)) {
+                    for (const vv of getVariables(v)) {
                         keys.push(vv + ":string")
                     }
                     typeResult += "\"" + k + "\":{" + keys.join(",") + "},"
@@ -29,7 +29,6 @@ module.exports = (cli) => {
             }
 
             typeResult += "}"
-
             console.log(`Writing types in node_modules`);
             writeFileSync(join(process.cwd(), 'node_modules', '@potoland', 'core', 'dist', '__generated.d.ts'), typeResult)
             console.log('Restart the IDE if you dont see any changes')
