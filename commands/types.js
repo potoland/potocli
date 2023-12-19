@@ -1,6 +1,8 @@
 const { writeFileSync } = require('fs')
 const { join } = require('path')
-const { getVariables, recursive } = require('../utils');
+const { getVariables, recursive, prompters } = require('../utils');
+const { getConfig } = require('..');
+const prompts = require('prompts');
 
 /**
  * 
@@ -8,12 +10,22 @@ const { getVariables, recursive } = require('../utils');
  */
 module.exports = (cli) => {
     cli.command('types')
-        .description('Aidjslhkadjkhjadkahsdjkhsadkdb.')
-        .argument('<path>', 'path to json')
-        .action((/**@type {string} str */str) => {
-            console.log('Reading', join(process.cwd(), str), 'to create types')
+        .description('Types for locales generator (AKA Black magic types inator).a')
+        .argument('<p>', 'name of main locale json')
+        .action(async (/**@type {string} str */str) => {
+            const config = getConfig();
+
+            if (!config.locations.langs) { return console.log('Please specify langs directory in poto.config.js') }
+
+            const localePath = join(process.cwd(), config.locations.langs, str)
+
+            const { value } = await prompts(prompters.confirm('Read ' + localePath))
+
+            if (!value) return;
+
+            console.log('Reading', localePath.split(process.cwd()).slice(1).join(process.cwd()), 'to create types')
             /**@type {Record<string, object>} */
-            const json = require(join(process.cwd(), str))
+            const json = require(localePath)
 
             let typeResult = "export interface __LangType{"
 

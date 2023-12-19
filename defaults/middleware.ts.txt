@@ -1,0 +1,13 @@
+import { createMiddleware } from "@potoland/core";
+
+type YourType = {}
+
+export const {{name}} = createMiddleware<YourType>(({ context, next, stop, pass }) => {
+    if (process.arch == "x64") {
+        next({
+
+        } as YourType)
+    } else {
+        stop(new Error("Arch is not yuumy"))
+    }
+})

@@ -1,22 +1,20 @@
 #!/usr/bin/env node
 const { Command } = require('commander');
+const { join } = require('path');
 // const { join } = require('path');
 
 const cli = new Command();
 
+module.exports = {
+    getConfig() {
+        return require(join(process.cwd(), 'poto.config.js'))
+    }
+}
+
 cli.name(Object.keys(require('./package.json').bin)[0]);
 
-require('./commands/types')(cli)
+require('./commands/generate')(cli)
 require('./commands/init')(cli)
-// cli.command('types')
-//     .description('')
-//     .argument('<path>', 'path to json')
-//     .action((/**@type {string} str */str) => {
-//         const json = require(join(process.cwd(), str))
-
-//         let typeResult = "export interface __GeneratedLangType{"
-
-
-//     })
+require('./commands/types')(cli)
 
 cli.parse(process.argv);

@@ -32,10 +32,10 @@ function getVariables(str) {
 }
 
 /**
- * @type {Record<string, import('prompts').PromptObject[]>}
+ * @type {Record<string, (...x:any[])=>import('prompts').PromptObject[]>}
  */
 const prompters = {
-    init:
+    init: () =>
         [{
             type: 'select',
             name: 'typo',
@@ -72,7 +72,21 @@ const prompters = {
             message: 'Do you want to start in debug mode?',
             active: 'Yes',
             inactive: 'No'
-        }]
+        }],
+    /**
+     * 
+     * @param {string} message yes
+     * @returns 
+     */
+    confirm: (message) => {
+        return [{
+            type: 'confirm',
+            name: 'value',
+            message,
+            initial: true
+        }
+        ]
+    }
 }
 
 module.exports = { getVariables, recursive, prompters };

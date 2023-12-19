@@ -1,9 +1,8 @@
 // @ts-check
 
-require('dotenv/config');
-const { config } = require('@potoland/core');
+{{importFormat}}
 
-module.exports = config.{{typo}}({
+{{exportFormat}} config.{{typo}}({
 	locations: {
 		base: {{baseR}},
 		output: {{outputR}},

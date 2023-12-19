@@ -1,0 +1,13 @@
+import { Declare, SubCommand, type CommandContext } from '@potoland/core';
+
+@Declare({
+	name: '{{name}}',
+	description: 'A command'
+})
+export class {{name}}Command extends SubCommand {
+
+	async run(ctx: CommandContext<true>) {
+		await ctx.write({ content: 'Error 418' })
+	}
+	
+}
