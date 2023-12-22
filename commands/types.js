@@ -10,7 +10,7 @@ const prompts = require('prompts');
  */
 module.exports = (cli) => {
     cli.command('types')
-        .description('Types for locales generator (AKA Black magic types inator).a')
+        .description('Types for locales generator (AKA Black magic types inator).')
         .argument('<p>', 'name of main locale json')
         .action(async (/**@type {string} str */str) => {
             const config = getConfig();
