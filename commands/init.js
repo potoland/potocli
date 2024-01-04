@@ -6,12 +6,12 @@ const { join } = require('node:path');
 const format = {
     'commonjs': {
         import: `require('dotenv/config');
-        const { config } = require('@potoland/core');`,
+const { config } = require('@potoland/core');`,
         export: `module.exports = `
     },
     'module': {
         import: `import 'dotenv/config;
-    import { config } from '@potoland/core';`,
+import { config } from '@potoland/core';`,
         export: `export default `
     }
 }
@@ -44,7 +44,7 @@ module.exports = (cli) => {
             for (const variable of variables) {
                 const key = variable.replace('R', '');
                 const value = response[key];
-                config = config.replace('{{' + variable + '}}', ['debug', 'typo'].includes(key) ? `${value}` : `'${value}'`);
+                config = config.replace('{{' + variable + '}}', ['debug', 'typo', 'exportFormat', 'importFormat'].includes(key) ? `${value}` : `'${value}'`);
             }
 
             await writeFile(join(process.cwd(), 'poto.config.js'), config)
